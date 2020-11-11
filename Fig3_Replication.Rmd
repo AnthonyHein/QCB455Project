@@ -1,0 +1,90 @@
+---
+title: "Final Project: Fig. 3 Replication"
+authors: "Anthony Hein, Briana Macedo, Manya Kapoor"
+output: html_notebook
+---
+
+```{r} 
+# Reading in files
+library(readxl)
+file3 <- read_excel("hCRISPRi_Library.xlsx",col_names = c("ID", "Gene", "TSS", "Protospacer", "Rank", "Predicted Activity Score", "Empirical Score", "Off-Target Stringency", "Predicyed Score 2.1", "Sublibrary", "Sublib Half"), na = "nan", skip = 9)
+file7 <- read_excel("hCRISPRi_GrowthPhenotype.xlsx", col_names = c("ID", "T0_R1", "E_R1", "T0_R2", "E_R2", "gamma_R1", "gamma_R2", "gamma_avg"), na = "nan", skip = 2)
+file8 <- read_excel("hCRISPRi_pVals.xlsx", col_names = c("Gene", "R1_Transcripts", "R1_MWP", "R1_AvgP3", "R1_sgRNApass", "R2_Transcripts", "R2_MWP", "R2_AvgP3", "R2_sgRNApass", "Avg_Transcripts", "Avg_MWP", "Avg_AvgP3", "Avg_sgRNApass","Hart_class", "Evers_class", "BCRamp_Wang"), na = "nan", skip = 2)
+```
+
+```{r}
+# Standardizing Order
+file3 <- file3[order(file3$ID),]
+file7 <- file7[order(file7$ID),]
+```
+
+```{r}
+# Selecting Top5 most effective sgRNA for the smaller 5 sgRNA/gene library
+file3_Top5 <- file3
+file3_Top5 <- subset(file3, file3$`Sublib Half` == "Top5")
+file7_Top5 <- subset(file7, file7$ID %in% file3_Top5$ID)
+```
+
+```{r}
+# Extracting avg sgRNA counts and growth phenotypes for 10 and 5 sgRNA/gene
+file7_counts <- as.data.frame(matrix(nrow = nrow(file7), ncol = 3))
+file7_Top5_counts <- as.data.frame(matrix(nrow = nrow(file7_Top5), ncol = 3))
+
+file7_counts[,1] <- file7[,1]
+file7_counts[,2] <- rowMeans(cbind(file7[,3] - file7[,2], file7[,5] - file7[,4]))
+file7_counts[,3] <- file7[,8]
+file7_Top5_counts[,1] <- file7_Top5[,1]
+file7_Top5_counts[,2] <- rowMeans(cbind(file7_Top5[,3] - file7_Top5[,2], file7_Top5[,5] - file7_Top5[,4]))
+file7_Top5_counts[,3] <- file7_Top5[,8]
+```
+
+```{r}
+# Extracting predicted activity scores for 10 and 5 sgRNA/gene
+file3_score <- as.data.frame(matrix(nrow = nrow(file3), ncol = 2))
+file3_Top5_score <- as.data.frame(matrix(nrow = nrow(file3_Top5), ncol = 2))
+
+file3_score[,1] <- file3[,1]
+file3_score[,2] <- file3[,9]
+file3_Top5_score[,1] <- file3_Top5[,1]
+file3_Top5_score[,2] <- file3_Top5[,9]
+```
+
+
+```{r}
+# RE to extract predicted activity scores for essential genes (from p_value file 8)
+Evers_essential_genes <- subset(file8, file8$Evers_class == "essential")$Gene
+Evers_compare <- unique(grep(paste("^",Evers_essential_genes,"_",collapse="|",sep=""), file3_Top5_score$V1, value=TRUE))
+Evers_Top5_activity <- file3_Top5_score[match(Evers_compare, file3_Top5_score[,1]),1:2]
+
+# histogram sorting essential genes by predicted activity score
+hist(Evers_Top5_activity[,2], breaks = seq(from = -0.2, to = 1.2, by=0.1))
+
+# Easier way 
+# Evers_essential_genes <- subset(file8, file8$Evers_class == "essential")$Gene
+# Evers_Top5_activity <- subset(file3_Top5_score, file3_Top5_score$V1 %in% Evers_essential_genes)
+# hist(Evers_Top5_activity[,2], breaks = seq(from = -0.2, to = 1.2, by=0.1))
+```
+
+```{r}
+# RE to extract growth phenotypes for essential genes (from p_value file 8)
+Evers_Top5_gamma_list <- unique(grep(paste("^",Evers_essential_genes,"_",collapse="|",sep=""), file7_Top5_counts$V1, value=TRUE))
+Evers_Top5_gamma <- file7_Top5_counts[match(Evers_Top5_gamma_list, file7_Top5_counts[,1]),1:3]
+
+# RE to extract growth phenotypes for non-essential genes (from p_value file 8)
+Evers_nonessential_genes <- subset(file8, file8$Evers_class == "non-essential")$Gene
+Evers_Top5_NE_gamma_list <- unique(grep(paste("^",Evers_nonessential_genes,"_",collapse="|",sep=""), file7_Top5_counts$V1, value=TRUE))
+Evers_Top5_NE_gamma <- file7_Top5_counts[match(Evers_Top5_NE_gamma_list, file7_Top5_counts[,1]),1:3]
+
+# Normalizing essential genes by non-essential gene distribution
+Evers_NE_mean <- mean(Evers_Top5_NE_gamma[,3], na.rm = TRUE)
+Evers_NE_SD <- sd(Evers_Top5_NE_gamma[,3], na.rm = TRUE)
+
+z_Evers_Top5_gamma <- scale(Evers_Top5_gamma[,3], center = TRUE, scale = TRUE)
+std_Evers_Top5_gamma <- (z_Evers_Top5_gamma * Evers_NE_SD) + Evers_NE_mean
+
+# Sorting growth phenotypes by predicted activity scores of those genes
+Evers_cat <- cut(Evers_Top5_activity[,2], seq(-0.2,1.2,0.1))
+
+# Boxplot to show growth phenotype for each category of predicted activity score
+boxplot(std_Evers_Top5_gamma~Evers_cat)
+```
