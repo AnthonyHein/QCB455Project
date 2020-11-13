@@ -1,7 +1,9 @@
 ---
-title: "Final Project: Fig. 3 Replication"
-authors: "Anthony Hein, Briana Macedo, Manya Kapoor"
-output: html_notebook
+title: 'Final Project: Fig. 3 Replication'
+output:
+  html_document:
+    df_print: paged
+authors: Anthony Hein, Briana Macedo, Manya Kapoor
 ---
 
 ```{r} 
