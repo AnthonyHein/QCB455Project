@@ -13,4 +13,13 @@ Other features which were not directly available to us where linked by the paper
 1. RNA folding metric package: https://scicrunch.org/resolver/SCR_008550
 2. Custom Python scripts with the module bxpython (v0.5.0, https://github.com/bxlab/bx-python) to extract the processed continuous signal from the following BigWig files obtained from the ENCODE consortium: MNase-seq https://www.encodeproject.org/files/ENCFF000VNN/ (Michael Snyder lab, Stanford University), DNase-seq https://www.encodeproject.org/files/ENCFF000SVY/ (Gregory Crawford lab, Duke University), and FAIRE-seq https://www.encodeproject.org/files/ENCFF000TLU/ (Jason Lieb lab, University of North Carolina) (ENCODE Project Consortium, 2012). 
 
+Stretch goals here are:
+
+- DNAse-seq signal
+- MNase-seq signal
+- FAIRE-seq signal
+- sgRNA overall folding free energy
+- RNA pairing at each position
+
 ### Authors: Anthony Hein, Manya Kapoor, Briana Macedo
+
