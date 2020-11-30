@@ -1,2 +1,10 @@
 .ipynb_checkpoints/*
 .DS_Store
+features_hCRISPRi_v2.1.csv
+features_hCRISPRi_v2.1_binned.csv
+features_hCRISPRi_v2.csv
+features_hCRISPRi_v2_binned.csv
+hCRISPRi_Library_v2.1.csv
+hCRISPRi_Library_v2.csv
+svr-v2.csv
+svr_v2.1.csv
