@@ -6,20 +6,17 @@ Horlbeck MA, Gilbert LA, Villalta JE, Adamson B, Pak RA, Chen Y, Fields AP, Park
 # **Link to the Figure 3 replication R Markdown [here](http://notes.anthonyhein.com/Fig3_Replication.html)**
 Also available in `Fig3_Replication.Rmd`, which does not show figures. 
 
-# Featurization notebook
+# Featurization 
 `Featurization.ipynb` shows featurization steps for sgRNA data. This pipeline is described in Fig 1a. of the paper linked above. Features include: Distance to TSS (primary and secondary, downstream and upstream), sgRNA length, template/sense strand, longest consecutive run of each base, overall nucleotide composition (% of A, C, T, G, GC, CA, AG), nucleotides and dimers at each position.
 
-Other features which were not directly available to us where linked by the paper to the following sources:
-1. RNA folding metric package: https://scicrunch.org/resolver/SCR_008550
-2. Custom Python scripts with the module bxpython (v0.5.0, https://github.com/bxlab/bx-python) to extract the processed continuous signal from the following BigWig files obtained from the ENCODE consortium: MNase-seq https://www.encodeproject.org/files/ENCFF000VNN/ (Michael Snyder lab, Stanford University), DNase-seq https://www.encodeproject.org/files/ENCFF000SVY/ (Gregory Crawford lab, Duke University), and FAIRE-seq https://www.encodeproject.org/files/ENCFF000TLU/ (Jason Lieb lab, University of North Carolina) (ENCODE Project Consortium, 2012). 
+# Fitting / Machine Learning
+`Fitting.ipynb` provides code for the Elastic Net Linear Regression Code, as well as the plotting code for Figure 1.
 
-Stretch goals here are:
+# Prediction Weights
+`Prediction_weights.ipynb`contains code for extracting features within a category, and the code for plotting the contribution of these features given the coefficients in our machine learning model.
 
-- DNAse-seq signal
-- MNase-seq signal
-- FAIRE-seq signal
-- sgRNA overall folding free energy
-- RNA pairing at each position
+
+Other features which were not available to use included DNAse-seq / MNase-seq / FAIRE-seq signal, sgRNA overall folding free energy, RNA pairing at each position
 
 ### Authors: Anthony Hein, Manya Kapoor, Briana Macedo
 
