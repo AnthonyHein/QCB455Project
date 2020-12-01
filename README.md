@@ -7,16 +7,15 @@ Horlbeck MA, Gilbert LA, Villalta JE, Adamson B, Pak RA, Chen Y, Fields AP, Park
 Also available in `Fig3_Replication.Rmd`, which does not show figures. 
 
 # Featurization 
-`Featurization.ipynb` shows featurization steps for sgRNA data. This pipeline is described in Fig 1a. of the paper linked above. Features include: Distance to TSS (primary and secondary, downstream and upstream), sgRNA length, template/sense strand, longest consecutive run of each base, overall nucleotide composition (% of A, C, T, G, GC, CA, AG), nucleotides and dimers at each position.
+`Featurization.ipynb` shows featurization steps for sgRNA data. This pipeline is described in Fig 1a. of the paper linked above. Features include: Distance to TSS (primary and secondary, downstream and upstream), sgRNA length, template/sense strand, longest consecutive run of each base, overall nucleotide composition (% of A, C, T, G, GC, CA, AG), nucleotides and dimers at each position. Features not available to us included DNAse-seq / MNase-seq / FAIRE-seq signal, sgRNA overall folding free energy, RNA pairing at each position
 
-# Fitting / Machine Learning
-`Fitting.ipynb` provides code for the Elastic Net Linear Regression Code, as well as the plotting code for Figure 1.
+
+# Fitting and Machine Learning
+`Fitting.ipynb` provides code for the Elastic Net Linear Regression training a 5-fold cross validation training, as well as the plotting code for Figure 1.
 
 # Prediction Weights
 `Prediction_weights.ipynb`contains code for extracting features within a category, and the code for plotting the contribution of these features given the coefficients in our machine learning model.
 
-
-Other features which were not available to use included DNAse-seq / MNase-seq / FAIRE-seq signal, sgRNA overall folding free energy, RNA pairing at each position
 
 ### Authors: Anthony Hein, Manya Kapoor, Briana Macedo
 
