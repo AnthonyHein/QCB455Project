@@ -16,6 +16,9 @@ Also available in `Fig3_Replication.Rmd`, which does not show figures.
 # Prediction Weights
 `Prediction_weights.ipynb`contains code for extracting features within a category, and the code for plotting the contribution of these features given the coefficients in our machine learning model.
 
+Small data files are also found in the public repository. Large \texttt{.csv} files are instead available through Google Drive at
+
+## Note that larger `.csv` files are stored in Google Drive and accessible via [https://drive.google.com/drive/folders/1hBk8SSjvc3XTXX40mjz9nQmcTlPxaT0S?usp=sharing](this) link.
 
 ### Authors: Anthony Hein, Manya Kapoor, Briana Macedo
 
