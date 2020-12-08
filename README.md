@@ -22,5 +22,9 @@ Also available in `Fig3_Replication.Rmd`, which does not show figures. This work
 
 Small data files are found in this public repository. Larger `.csv` files are stored in Google Drive and accessible via [this](https://drive.google.com/drive/folders/1hBk8SSjvc3XTXX40mjz9nQmcTlPxaT0S?usp=sharing) link.
 
+## Acknowledgements
+
+Python notebooks use libraries such as `scikit-learn`, `matplotlib`, `numpy`, `pandas`, and `scipy`.
+
 ### Authors: Anthony Hein, Manya Kapoor, Briana Macedo
 
