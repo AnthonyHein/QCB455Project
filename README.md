@@ -4,8 +4,8 @@ Final project for QCB 455. We have replicated parts of the analysis from the res
 Horlbeck MA, Gilbert LA, Villalta JE, Adamson B, Pak RA, Chen Y, Fields AP, Park CY, Corn
 JE, Kampmann M, Weissman JS. Compact and highly active next-generation libraries for CRISPRmediated gene repression and activation. Elife. 2016 Sep 23;5:e19760
 
-# **Link to the Figure 3 replication R Markdown [here](http://notes.anthonyhein.com/Fig3_Replication.html)**
-Also available in `Fig3_Replication.Rmd`, which does not show figures. This work was done by Manya Kapoor.
+# Figure 3 Replication
+Since RMarkdown cannot be visualized in GitHub, we are displaying this file at [this](http://notes.anthonyhein.com/Fig3_Final.html) link.
 
 # Featurization 
 `Featurization.ipynb` shows featurization steps for sgRNA data. This pipeline is described in Fig 1a. of the paper linked above. Features include: Distance to TSS (primary and secondary, downstream and upstream), sgRNA length, template/sense strand, longest consecutive run of each base, overall nucleotide composition (% of A, C, T, G, GC, CA, AG), nucleotides and dimers at each position. Features not available to us included DNAse-seq / MNase-seq / FAIRE-seq signal, sgRNA overall folding free energy, RNA pairing at each position. All multiclass or numerical features were binned with `Binning.ipynb`. Anthony Hein and Briana Macedo contributed equally to `Featurization.ipynb` while Briana Macedo was the sole author of `Binning.ipynb`.
